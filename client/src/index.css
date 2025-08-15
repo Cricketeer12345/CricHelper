@@ -1,0 +1,259 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 110 50% 85%; /* Light green field */
+    --foreground: 0 0% 0%;
+    --card: 30 25% 65%; /* Cricket pitch brown RGB(184, 172, 143) */
+    --card-foreground: 0 0% 0%;
+    --popover: 30 25% 65%;
+    --popover-foreground: 0 0% 0%;
+    --primary: 25 30% 40%; /* Darker cricket pitch brown */
+    --primary-foreground: 0 0% 98%;
+    --secondary: 110 30% 75%; /* Muted field green */
+    --secondary-foreground: 0 0% 0%;
+    --muted: 110 25% 80%; /* Light field green */
+    --muted-foreground: 0 0% 15%; /* Darker for better visibility */
+    --accent: 30 30% 60%; /* Light cricket pitch */
+    --accent-foreground: 0 0% 0%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 30 20% 55%; /* Cricket pitch border */
+    --input: 30 25% 70%; /* Input cricket pitch */
+    --ring: 25 30% 40%;
+    --chart-1: 110 60% 50%; /* Cricket field green */
+    --chart-2: 30 30% 45%; /* Cricket pitch brown */
+    --chart-3: 45 50% 55%; /* Leather brown */
+    --chart-4: 200 30% 45%; /* Cricket sky blue */
+    --chart-5: 340 75% 55%;
+    --radius: 0.75rem;
+  }
+  
+  .dark {
+    --background: 110 40% 15%; /* Dark field green */
+    --foreground: 0 0% 95%;
+    --card: 30 20% 25%; /* Dark cricket pitch */
+    --card-foreground: 0 0% 95%;
+    --popover: 30 20% 25%;
+    --popover-foreground: 0 0% 95%;
+    --primary: 30 25% 35%; /* Medium cricket pitch */
+    --primary-foreground: 0 0% 95%;
+    --secondary: 110 25% 20%; /* Dark field green */
+    --secondary-foreground: 0 0% 95%;
+    --muted: 110 20% 18%; /* Darker field */
+    --muted-foreground: 0 0% 80%; /* Lighter for better visibility in dark */
+    --accent: 30 20% 30%; /* Dark cricket pitch */
+    --accent-foreground: 0 0% 95%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 30 15% 30%; /* Dark pitch border */
+    --input: 30 15% 30%; /* Dark input */
+    --ring: 30 25% 45%;
+    --chart-1: 110 50% 40%; /* Dark field green */
+    --chart-2: 30 30% 40%; /* Dark cricket pitch */
+    --chart-3: 45 40% 40%; /* Dark leather */
+    --chart-4: 200 25% 35%; /* Dark cricket blue */
+    --chart-5: 340 60% 45%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  
+  body {
+    @apply bg-background text-foreground;
+    background-image: 
+      radial-gradient(circle at 20% 20%, rgba(34, 139, 34, 0.1) 0%, transparent 50%),
+      radial-gradient(circle at 80% 80%, rgba(34, 139, 34, 0.1) 0%, transparent 50%),
+      radial-gradient(circle at 40% 60%, rgba(34, 139, 34, 0.05) 0%, transparent 50%);
+    background-attachment: fixed;
+    min-height: 100vh;
+    font-weight: 500; /* Slightly bolder default font weight */
+  }
+  
+  /* Cricket field texture overlay */
+  .cricket-field::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: 
+      linear-gradient(90deg, rgba(34, 139, 34, 0.02) 1px, transparent 1px),
+      linear-gradient(rgba(34, 139, 34, 0.02) 1px, transparent 1px);
+    background-size: 50px 50px;
+    pointer-events: none;
+    z-index: -1;
+  }
+}
+
+@layer components {
+  /* Cricket pitch styled cards */
+  .cricket-card {
+    @apply border-2 border-border shadow-lg;
+    background: linear-gradient(135deg, 
+      rgb(184, 172, 143) 0%, 
+      rgb(174, 162, 133) 70%, 
+      rgb(164, 152, 123) 100%);
+    box-shadow: 
+      0 4px 6px -1px rgba(101, 67, 33, 0.3),
+      0 2px 4px -1px rgba(101, 67, 33, 0.2),
+      inset 0 1px 0 0 rgba(255, 255, 255, 0.2);
+    color: #2c1810; /* Dark brown text for better contrast */
+  }
+  
+  /* Cricket themed buttons */
+  .cricket-button {
+    background: linear-gradient(135deg, 
+      rgb(164, 152, 123) 0%, 
+      rgb(144, 132, 103) 100%);
+    border: 2px solid rgb(124, 112, 83);
+    box-shadow: 
+      0 2px 4px rgba(101, 67, 33, 0.4),
+      inset 0 1px 0 rgba(255, 255, 255, 0.15);
+    transition: all 0.2s ease;
+    color: #2c1810; /* Dark brown text */
+    font-weight: 600; /* Bolder button text */
+    text-shadow: 0 1px 2px rgba(255, 255, 255, 0.3); /* Subtle text shadow */
+  }
+  
+  .cricket-button:hover {
+    transform: translateY(-1px);
+    box-shadow: 
+      0 4px 8px rgba(101, 67, 33, 0.5),
+      inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    background: linear-gradient(135deg, 
+      rgb(174, 162, 133) 0%, 
+      rgb(154, 142, 113) 100%);
+  }
+  
+  /* Cricket field input styling */
+  .cricket-input {
+    @apply border-2 border-border;
+    background: linear-gradient(135deg, 
+      rgb(194, 182, 153) 0%, 
+      rgb(184, 172, 143) 100%);
+    color: #2c1810; /* Dark brown text */
+    font-weight: 500; /* Medium font weight */
+  }
+  
+  .cricket-input::placeholder {
+    color: #5a4a3a; /* Darker placeholder text */
+    opacity: 0.8;
+  }
+  
+  /* Cricket themed progress bars */
+  .cricket-progress {
+    background: linear-gradient(90deg,
+      hsl(110 60% 45%) 0%,
+      hsl(70 60% 50%) 50%,
+      hsl(30 60% 50%) 100%);
+  }
+  
+  /* Enhanced text visibility */
+  .text-amber-900 {
+    color: #1c1000 !important; /* Very dark amber for better visibility */
+    font-weight: 700;
+    text-shadow: 0 1px 2px rgba(255, 255, 255, 0.3);
+  }
+  
+  .text-amber-800 {
+    color: #2c1810 !important; /* Dark brown */
+    font-weight: 600;
+  }
+  
+  .text-amber-700 {
+    color: #3c2820 !important; /* Medium brown */
+    font-weight: 500;
+  }
+  
+  .text-amber-600 {
+    color: #4c3830 !important; /* Lighter brown */
+    font-weight: 500;
+  }
+  
+  /* Card title styling */
+  .cricket-card .font-bold {
+    color: #1c1000 !important;
+    font-weight: 700;
+    text-shadow: 0 1px 2px rgba(255, 255, 255, 0.4);
+  }
+  
+  /* Muted text enhancement */
+  .text-muted-foreground {
+    color: #3c2820 !important;
+    font-weight: 500;
+  }
+  
+  /* Primary text enhancement */
+  .text-primary {
+    color: #2c1810 !important;
+    font-weight: 600;
+  }
+  
+  /* Card content text */
+  .cricket-card p,
+  .cricket-card div {
+    color: #2c1810;
+    font-weight: 500;
+  }
+}
+
+/* Custom scrollbar with cricket theme */
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgb(194, 182, 153);
+  border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, 
+    rgb(164, 152, 123) 0%, 
+    rgb(144, 132, 103) 100%);
+  border-radius: 6px;
+  border: 2px solid rgb(194, 182, 153);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(135deg, 
+    rgb(154, 142, 113) 0%, 
+    rgb(134, 122, 93) 100%);
+}
+
+/* Cricket themed selection */
+::selection {
+  background-color: rgb(164, 152, 123);
+  color: #1c1000;
+}
+
+/* Cricket themed focus rings */
+*:focus-visible {
+  outline: 2px solid rgb(144, 132, 103);
+  outline-offset: 2px;
+}
+
+/* Enhanced label visibility */
+label {
+  color: #2c1810 !important;
+  font-weight: 600 !important;
+  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.3);
+}
+
+/* Enhanced button text visibility */
+button {
+  font-weight: 600 !important;
+}
+
+/* Enhanced heading visibility */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 700 !important;
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.3);
+}
